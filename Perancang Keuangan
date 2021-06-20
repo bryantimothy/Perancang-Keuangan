@@ -7,102 +7,134 @@ Joshua Prasatya Gani 1906384011
 #include <stdlib.h>
 #include <time.h>
 //Aplikasi Money Tracker
-int arr[250];
+
 struct keuangan
 {
-	char deposit[10];//input deposit 
-	char keluar[10];//output dari deposit
-	int input;//nilai input
-	int balance;//nilai balance 
-	int output;//nilai output
+char deposit[10];//input deposit 
+ char keluar[10];//output dari deposit
+ int input;//nilai input
+ int balance;//nilai balance 
+ int output;//nilai output
 }; 
 void deposit(struct keuangan*ptr);//function definition
 void riwayat(struct keuangan*ptr);//function definition
 void transaksi(struct keuangan*ptr);//function definition
-int data;
-int saving;
-int data1;
+int data;//jumlah data input
+int saving;//nilai angka aman
+int saving2;//nilai angka aman dalam persentase
+int data1;//jumlah data output
 int main(){
-	int num=1;
-	int menu;//nilai input
-	int pass;//input password yang diinginkan
-	int pass1;//input password yang sudah disimpan 
-	int i,j;
-	 time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    printf("Tanggal: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour+7, tm.tm_min, tm.tm_sec);//print tanggal dan waktu
-	struct keuangan*ptr;
-	ptr = (struct keuangan*)malloc(num *sizeof(struct keuangan));
-	printf("==================================\n"); //print "=" sebagai pemisah
-	printf("Aplikasi perkiraan keuangan\n"); //print string 
-	printf("==================================\n"); //print "=" sebagai pemisah
+  char password[6], username[10],ch, pass[10], dh;//funcion untuk password dari program
+int num=1;//integer num sama dengan 1
+int menu;//nilai input
+  int i,j;//increment
+     time_t t = time(NULL);//operator menunjukan waktu 
+    struct tm tm = *localtime(&t);//spesifikasi waktu
+    printf("Tanggal: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);//print tanggal dan waktu
+  struct keuangan*ptr;//output angka
+  ptr = (struct keuangan*)malloc(num *sizeof(struct keuangan));//allocating memory
+printf("==================================\n"); //print "=" sebagai pemisah
+  printf("Aplikasi perkiraan keuangan\n");//print string
+printf("==================================\n");//print "=" sebagai pemisah
+  printf("Aplikasi ini akan meminta nilai persentase dari\nkeuangan anda yang merupakan zona aman\n");//print string
+char arr[0][12];//array 2 dimensi 
+ arr[0][0]= 'M';//array untuk baris 0 kolom 0
+ arr[0][1]= 'o';//array untuk baris 0 kolom 1
+ arr[0][2]= 'n';//array untuk baris 0 kolom 2
+ arr[0][3]= 'e';//array untuk baris 0 kolom 3
+ arr[0][4]='y';//array untuk baris 0 kolom 4
+ arr[0][6]='t';//array untuk baris 0 kolom 6
+ arr[0][7]='r';//array untuk baris 0 kolom 7
+ arr[0][8]='a';//array untuk baris 0 kolom 8
+ arr[0][9]='c';//array untuk baris 0 kolom 9
+ arr[0][10]='k';//array untuk baris 0 kolom 10
+ arr[0][11]='e';//array untuk baris 0 kolom 11
+ arr[0][12]='r';//array untuk baris 0 kolom 12
+ for(i = 0; i < 13; i++)//loop sampai mencapai jumlah i=12
+ {
+                printf("%c ", arr[0][i]);//print "moneytracker"
+    }
+    printf("\n");//print 'new line'
+  printf("Masukan persentase uang aman yang anda inginkan:");//print string sebagai perintah untuk user 
+  scanf("%d", &saving);//input dari user 
+ saving2 = saving /100;//kalkulasi saving2 dari saving awal yang diinput user
+ printf("Masukan 6 angka sebagai password:");//print string sebagai perintah untuk user
+ for(i=0;i<6;i++){//loop sampai mencapai jumlah i=5
+  ch=getch();//input character
+  password[i]=ch;//array dari password
+  ch='*';//mengubah character menjadi '*' 
+  printf("%c",ch);//print password dalam bentuk '*'
+ }
+ do //loop untuk menjalankan argumen terlebih dahulu, baru cek kondisi nya
+ {
+ printf("\nMasukan password yang anda:");//print string sebagai perintah untuk user
+  for(i=0;i<6;i++){//loop sampai mencapai jumlah i=5
+   dh=getch();//input character
+   pass[i]=dh;//array dari password
+   dh='*';//mengubah character menjadi '*' 
+   printf("%c",dh);//print password dalam bentuk '*'
+  }
+  for(i=0;i<6;i++){//loop sampai mencapai jumlah i=5
+   if(pass[i]==password[i]){
+    j++;//nilai dari j diincrement
+    if(j == 6){//kondisi untuk cek nilai j
+   printf("==================================\n");//print "=" sebagai pemisah
+ printf("Masukan angka 1 untuk mengisi input deposit\n");//print opsi yang ada dalam program
+ printf("Masukan angka 2 untuk mencatat pengeluaran\n");//print opsi yang ada dalam program
+ printf("Masukan angka 3 untuk mengecek riwayat transaksi\n");//print opsi yang ada dalam program
+ printf("Masukan angka 4 untuk mengakhiri program\n");//print opsi yang ada dalam program
+ printf("==================================\n");//print "=" sebagai pemisah
+ printf("Masukan angka untuk mengakses menu:");//print string sebagai perintah untuk user
+ scanf("%d", &menu);//input opsi yang diinginkan user 
 
-    
-
-
-	printf("Aplikasi ini akan meminta nilai persentase dari\nkeuangan anda yang merupakan zona aman\n"); //print string
-	printf("Masukan persentase uang aman yang anda inginkan:");//print string sebagai perintah untuk user
-	scanf("%d", &saving);//input dari user 
-	saving = saving /100;//kalkulasi saving
-	printf("Masukan angka yang anda inginkan menjadi password<angka>:");//print string sebagai perintah untuk user
-	scanf("%d", &pass);//input user password
-	do //loop untuk menjalankan argumen terlebih dahulu, baru cek kondisi nya
-	{
-	printf("Masukan password yang anda:");//print string sebagai perintah untuk user
-	scanf("%d",&pass1);//input password dari user
-	if( pass1 == pass)//kondisi untuk cek apakah password nya benar
-	{
-    printf("==================================\n");//print "=" sebagai pemisah
-	printf("Masukan angka 1 untuk mengisi input deposit\n");//print opsi yang ada dalam program
-	printf("Masukan angka 2 untuk mencatat pengeluaran\n");//print opsi yang ada dalam program
-	printf("Masukan angka 3 untuk mengecek riwayat transaksi\n");//print opsi yang ada dalam program
-	printf("Masukan angka 4 untuk mengakhiri program\n");//print opsi yang ada dalam program
-	printf("==================================\n");//print "=" sebagai pemisah
-	printf("Masukan angka untuk mengakses menu:");//print string sebagai perintah untuk user
-	scanf("%d", &menu);//input opsi yang diinginkan user 
-	switch(menu)//menentukan opsi yang dipilih oleh user
-	{
-		case 1://untuk menu 1
-		printf("Masukan berapa banyak jenis deposit yang akan diinput:");//print perintah untuk user
-		scanf("%d",&data);//input berapa deposit dari user
-		if(data == 0){//kondisi untuk cek nilai data
-		    printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");//print perintah untuk user
-		    scanf("%d", &data);//input nilai data dari user 
-		}
-		deposit(ptr);
-		break;//untuk menghentikan switch
-		case 2://untuk menu 2
-		printf("Masukan berapa jenis pengeluaran yang akan diinput:");//print perintah untuk user
-		scanf("%d", &data1);//input nilai data1 dari user
-		if(data1 == 0){//kondisi untuk cek 
-		    printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");//print perintah untuk user
-		    scanf("%d", &data1);//input nilai data dari user
-		}
-		transaksi(ptr);//memanggil function transaksi
-		break;//untuk menghentikan switch
-		case 3://untuk menu 3
-		riwayat(ptr);//memanggil function riwayat
-		break;//untuk menghentikan switch
-		case 4://untuk menu 4
-		return 0;//untuk mengindikasikan menu 4 sudah berakhir
-	}
-	}
-}
-while(menu != 0);//kondisi agar aplikasi tidak berhenti pada penginputan nilai
-	return 0;//untuk mengindikasikan akhir dari program 
-}
-void deposit(struct keuangan*ptr)
+switch(menu)//menentukan opsi yang dipilih oleh user
 {
-	int i;//nilai yang digunakan untuk increment
-	for(i = 0; i<data; i++)//loop sampai mencapai jumlah yang diinput dalam data
-	{
-		printf("Masukan jenis deposit:"); //print perintah merupakan input ,seperti Gaji, THR, dan lain-lain
-		scanf("%s", (ptr+i)->deposit);//input string dari user
-		printf("Input deposit nomor %d:", i+1);//print perintah merupakan input, berupa nilai yang diinput
-		scanf("%d", &(ptr+i)->input);//input nilai dari user
-	}
+case 1://untuk menu 1
+  printf("Masukan berapa banyak jenis deposit yang akan diinput:");//print perintah untuk user
+  scanf("%d",&data);//input berapa deposit dari user
+  if(data == 0){//kondisi untuk cek nilai data
+      printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");//print perintah untuk user
+      scanf("%d", &data);//input nilai data dari user 
+  }
+  deposit(ptr);//call function dengan pointer
+  break;//untuk menghentikan switch
+
+  case 2://untuk menu 2
+  printf("Masukan berapa jenis pengeluaran yang akan diinput:");//print perintah untuk user
+  scanf("%d", &data1);//input nilai data1 dari user
+  if(data1 == 0){//kondisi untuk cek 
+      printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");//print perintah untuk user
+      scanf("%d", &data1);//input nilai data dari user
+  }
+  transaksi(ptr);//memanggil function transaksi
+  break;//untuk menghentikan switch
+
+  case 3://untuk menu 3
+  riwayat(ptr);//memanggil function riwayat
+  break;//untuk menghentikan switch
+
+  case 4://untuk menu 4
+  return 0;//untuk mengindikasikan menu 4 sudah berakhir
+  }
+  j= 0;//mengubah nilai j menjadi 0 untuk ngereset loop password
+  }}}}
+ while(menu != 0);//Agar aplikasi tidak berhenti pada penginputan nilai
+ return 0;//untuk mengindikasikan akhir dari program 
+ }
+
+
+void deposit(struct keuangan*ptr)//fungsi deposit
+{
+int i;//nilai yang digunakan untuk increment
+ for(i = 0; i<data; i++)//loop sampai mencapai jumlah yang diinput dalam data
+ {
+  printf("Masukan jenis deposit:"); //print perintah merupakan input ,seperti Gaji, THR, dan lain-lain
+  scanf("%s", (ptr+i)->deposit);//input string dari user
+  printf("Input deposit nomor %d:", i+1);//print perintah merupakan input, berupa nilai yang diinput
+  scanf("%d", &(ptr+i)->input);//input nilai dari user
+ }
 }
-void transaksi(struct keuangan*ptr)
+void transaksi(struct keuangan*ptr)//fungsi transaksi
 {
     int i;//nilai yang digunakan untuk increment
     for(i = 0; i<data1; i++)//Loop sampai mencapai jumlah yang diinput dalam data1 
@@ -113,251 +145,53 @@ void transaksi(struct keuangan*ptr)
         scanf("%d", &(ptr+i)->output);//input data dari user
     }
 }
-void riwayat(struct keuangan*ptr)
+
+
+
+void riwayat(struct keuangan*ptr)//fungsi riwayat
 {
-	int i;//nilai yang digunakan untuk increment
-	int saldo = 0;//nilai saldo
-	int pemasukan = 0;//nilai pemasukan
-	int pengeluaran = 0;//nilai pengeluaran
-	int saldo1 = 0;//nilai output 
-	int saldo2 = 0;//nilai output 
-	 
-	printf ("\n================= Riwayat =================");//print string
-	printf ("\nNo\tTransaksi\tJumlah\n");//print string
-	
-	for (i=0; i< data;i++){//loop sampai mencapai jumlah yang diinput dalam data
-		pemasukan += (ptr+i)->input;//kalkulasi pemasukan
-	}
-	
-	for (i=0; i< data;i++){//loop sampai mencapai jumlah yang diinput dalam data
-		printf ("%d\t%s\t%d\n", i+1, (ptr+i)->deposit, (ptr+i)->input);//print data dan string yang diinput dalam bentuk tabel)
-	}
-	
-	printf("Total\tPemasukan\t%d\n", pemasukan);//print nilai pemasukan 
-	
-	printf ("\n================= Riwayat =================");//print string
-	printf ("\nNo\tTransaksi\tJumlah\n");//print string
-	
-	for (i=0; i< data1;i++){//loop sampai mencapai jumlah yang diinput dalam data
-		pengeluaran += (ptr+i)->output;//kalkulasi pengeluaran
-	}
-	
-	for (i=0; i< data1;i++){//loop sampai mencapai jumlah yang diinput dalam data1
-		printf ("%d\t%s\t\t%d\n", i+1, (ptr+i)->keluar, (ptr+i)->output);//print data dan string yang diinput dalam bentuk tabel
-	}
-	
-	printf("Total\tPengeluaran\t%d\n", pengeluaran);//print pengeluaran
-	
-	for( i = 0; i<data; i++)//loop sampai mencapai jumlah yang diinput dalam data
-	{
-	     saldo +=(ptr+i)->input;//Melakukan penginputan input
-	}
-	
-	for( i = 0; i<data1; i++)//loop sampai mencapai jumlah yang diinput dalam data
-	{
-		saldo1-=(ptr+i)->output;//Melakukan penginputan ouput
-	}
-	
-	saldo2 += saldo1 + saldo;//kalkukasi saldo akhir
-	
-	printf("\nTotal saldo tersisa %d\n", saldo2);// print saldo yang sudah dikalkulasikan
-	
-	if(saldo2 < (saving*saldo2))//kondisi untuk cek nilai saldo2
-	{
-	    printf("Keuangan anda tidak sesuai dengan profil risiko anda\n");//print string berdasarkan kalkulasi 
-	}
-	 else{//apabila kondisi if tidak sesuai
-	     printf("Status keuangan anda sesuai dengan harapan anda\n");//print string berdasarkan kalkulasi
-	 }
-}
+int i;//nilai yang digunakan untuk increment
+ int saldo = 0;//nilai saldo
+ int pemasukan = 0;//nilai pemasukan
+ int pengeluaran = 0;//nilai pengeluaran
+ int saldo1 = 0;//nilai output 
+ int saldo2 = 0;//nilai output 
+  
+ printf ("\n================= Riwayat =================");//print string
+ printf ("\nNo\tTransaksi\tJumlah\n");//print string
+ 
+ for (i=0; i< data;i++){//loop sampai mencapai jumlah yang diinput dalam data
+  pemasukan += (ptr+i)->input;//kalkulasi pemasukan
+ }
+ 
+ for (i=0; i< data;i++){//loop sampai mencapai jumlah yang diinput dalam data
+  printf ("%d\t%s\t%d\n", i+1, (ptr+i)->deposit, (ptr+i)->input);//print data dan string yang diinput dalam bentuk tabel)
+ }
+ 
+ printf("Total\tPemasukan\t%d\n", pemasukan);//print nilai pemasukan 
+ 
+  for( i = 0; i<data; i++)//loop sampai mencapai jumlah yang diinput dalam data
+ {
+      saldo +=(ptr+i)->input;//Melakukan penginputan input
+ }
+ 
+ for( i = 0; i<data1; i++)//loop sampai mencapai jumlah yang diinput dalam data1
+ {
+  saldo1-=(ptr+i)->output;//Melakukan penginputan ouput
+ }
+ 
+ saldo2 += saldo + saldo1;//kalkulasi saldo2
+ 
+ printf("\nTotal saldo tersisa %d\n", saldo2);//print saldo yang sudah dikalkulasikan 
 
-
-
-
-/*
-Bryan Timothy 1906384213
-Jeremia June Caesar Parsinabul 1906306621
-Joshua Prasatya Gani 1906384011
-*/
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-//Aplikasi Money Tracker
-int arr[250];
-struct keuangan
-{
-	char deposit[10];\\input deposit 
-	char keluar[10];\\output dari deposit
-	int input;\\nilai input
-	int balance;\\nilai balance 
-	int output;\\nilai output
-}; 
-void deposit(struct keuangan*ptr);
-void riwayat(struct keuangan*ptr);
-void transaksi(struct keuangan*ptr);
-int data;
-int saving;
-int data1;
-int main(){
-	int num=1;
-	int menu;
-	int pass;
-	int pass1;
-Int i, j;
-	 time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    printf("Tanggal: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour+7, tm.tm_min, tm.tm_sec);
-	struct keuangan*ptr;
-	ptr = (struct keuangan*)malloc(num *sizeof(struct keuangan));
-	printf("==================================\n");
-	printf("Aplikasi perkiraan keuangan\n");
-	printf("==================================\n");
-	arr[2][0]= 1;
-arr[2][1]= 2;
-arr[2][2]= 3;
-arr[2][3]= 4;
-
-
-for(i = 0; i < 5; i++){
-        for(j = 0; j < 5; j++){
-            if(arr[i][j] == 0){
-                printf("  ");
-            }
-            else{
-                printf("%d ", arr[i][j]);
-            }
-        }
-        printf("\n");
-    }
-
-
-	printf("Aplikasi ini akan meminta nilai persentase dari\nkeuangan anda yang merupakan zona aman\n");
-	printf("Masukan persentase uang aman yang anda inginkan:");
-	scanf("%d", &saving);
-	saving = saving /100;
-	printf("Masukan angka yang anda inginkan menjadi password<angka>:");
-	scanf("%d", &pass);
-	do
-	{
-	printf("Masukan password yang anda:");
-	scanf("%d",&pass1);
-	if( pass1 == pass)
-	{
-    printf("==================================\n");
-	printf("Masukan angka 1 untuk mengisi input deposit\n");
-	printf("Masukan angka 2 untuk mencatat pengeluaran\n");
-	printf("Masukan angka 3 untuk mengecek riwayat transaksi\n");
-	printf("Masukan angka 4 untuk mengakhiri program\n");
-	printf("==================================\n");
-	printf("Masukan angka untuk mengakses menu:");
-	scanf("%d", &menu);
-	switch(menu)
-	{
-		case 1:
-		printf("Masukan berapa banyak jenis deposit yang akan diinput:");
-		scanf("%d",&data);
-		if(data == 0){
-		    printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");
-		    scanf("%d", &data);
-		}
-		deposit(ptr);
-		break;
-		case 2:
-		printf("Masukan berapa jenis pengeluaran yang akan diinput:");
-		scanf("%d", &data1);
-		if(data1 == 0){
-		    printf("Masukan data lebih dari nol atau tekan nol untuk kembali ke menu:");
-		    scanf("%d", &data1);
-		}
-		transaksi(ptr);//memanggil function transaksi
-		break;
-		case 3:
-		riwayat(ptr);//memanggil function riwayat
-		break;
-		case 4:
-		return 0;
-	}
-	}
-}
-while(menu != 0);//Agar aplikasi tidak berhenti pada penginputan nilai
-	return 0;
-}
-void deposit(struct keuangan*ptr)
-{
-	int i;//nilai yang digunakan untuk increment
-	for(i = 0; i<data; i++)
-	{
-		printf("Masukan jenis deposit:"); //Merupakan input ,seperti Gaji, THR, dan lain-lain
-		scanf("%s", (ptr+i)->deposit);
-		printf("Input deposit nomor %d:", i+1);//Merupakan input, berupa nilai yang diinput
-		scanf("%d", &(ptr+i)->input);
-	}
-}
-void transaksi(struct keuangan*ptr)
-{
-    int i;//nilai yang digunakan untuk increment
-    for(i = 0; i<data1; i++)
-    {
-        printf("Masukan jenis pengeluaran:");
-        scanf("%s", (ptr+i)->keluar);
-        printf("Output dari deposit nomor %d:", i+1);
-        scanf("%d", &(ptr+i)->output);
-    }
-}
-void riwayat(struct keuangan*ptr)
-{
-	int i;//nilai yang digunakan untuk increment
-	int saldo = 0;
-	int pemasukan = 0;
-	int pengeluaran = 0;
-	int saldo1 = 0;
-	int saldo2 = 0;
-	 
-	printf ("\n================= Riwayat =================");
-	printf ("\nNo\tTransaksi\tJumlah\n");
-	
-	for (i=0; i< data;i++){
-		pemasukan += (ptr+i)->input;
-	}
-	
-	for (i=0; i< data;i++){
-		printf ("%d\t%s\t%d\n", i+1, (ptr+i)->deposit, (ptr+i)->input);
-	}
-	
-	printf("Total\tPemasukan\t%d\n", pemasukan);
-	
-	printf ("\n================= Riwayat =================");
-	printf ("\nNo\tTransaksi\tJumlah\n");
-	
-	for (i=0; i< data1;i++){
-		pengeluaran += (ptr+i)->output;
-	}
-	
-	for (i=0; i< data1;i++){
-		printf ("%d\t%s\t\t%d\n", i+1, (ptr+i)->keluar, (ptr+i)->output);
-	}
-	
-	printf("Total\tPengeluaran\t%d\n", pengeluaran);
-	
-	for( i = 0; i<data; i++)
-	{
-	     saldo +=(ptr+i)->input;//Melakukan penginputan input
-	}
-	
-	for( i = 0; i<data1; i++)
-	{
-		saldo1-=(ptr+i)->output;//Melakukan penginputan ouput
-	}
-	
-	saldo2 += saldo1 + saldo;
-	
-	printf("\nTotal saldo tersisa %d\n", saldo2); 
-	
-	if(saldo2 < (saving*saldo2))
-	{
-	    printf("Keuangan anda tidak sesuai dengan profil risiko anda\n");
-	}
-	 else{
-	     printf("Status keuangan anda sesuai dengan harapan anda\n");
-	 }
+ if(saldo2 < 0)//kondisi untuk cek nilai saldo2
+ {
+     printf("Keuangan anda tidak sesuai dengan profil risiko anda\n");//print string berdasarkan kalkulasi
+ }
+ else if(saldo2 < (saving2*saldo1)){//apabila kondisi if tidak sesuai
+  printf("Keuangan anda tidak sesuai dengan profil risiko anda\n");//print string berdasarkan kalkulasi 
+ }
+ else{//apabila kondisi else if tidak sesuai
+      printf("Status keuangan anda sesuai dengan harapan anda\n");//print string berdasarkan kalkulasi
+  } 
 }
